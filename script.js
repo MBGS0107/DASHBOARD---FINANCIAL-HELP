@@ -3,7 +3,7 @@ class DashboardApp {
         this.currentType = null;
         this.apiUrl = "https://www.dolarbluebolivia.click/proxy/gsheet2"; // o el dominio real donde despliegues el Flask
 
-        
+
         this.init();
     }
 
@@ -100,9 +100,11 @@ class DashboardApp {
                     nombreProducto: producto,
                 }),
             });
-            
-            const precio = await response.text();
+
+            const json = await response.json();
+            const precio = json.precio;
             document.getElementById("income-precio").value = precio;
+
             actualizarTotal();
         } catch (error) {
             console.error("Error al obtener precio:", error);
@@ -230,7 +232,7 @@ class DashboardApp {
     resetForm(type) {
         const form = document.getElementById(`${type}-form`).querySelector('form');
         const inputs = form.querySelectorAll('input, select');
-        
+
         inputs.forEach(input => {
             if (input.type !== 'date') {
                 input.value = '';
@@ -274,6 +276,6 @@ function enviarEgreso() {
 }
 
 // Inicializar la aplicación cuando el DOM esté cargado
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     app = new DashboardApp();
 });
