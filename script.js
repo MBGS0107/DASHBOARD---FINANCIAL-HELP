@@ -179,8 +179,8 @@ class DashboardApp {
                 }),
             });
 
-            const message = await response.text();
-            this.showAlert("✅ " + message, "success");
+            const json = await response.json();
+            this.showAlert("✅ " + json.message, "success");
             this.resetForm('income');
         } catch (error) {
             console.error("Error:", error);
