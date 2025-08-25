@@ -15,12 +15,24 @@ class DashboardApp {
     // Establecer fecha automática al cargar
     setCurrentDate() {
         const today = new Date();
-        const formattedDate = today.getFullYear() + '-' +
-            String(today.getMonth() + 1).padStart(2, '0') + '-' +
-            String(today.getDate()).padStart(2, '0');
+        // Formato MM/DD/YYYY
+        const formattedDate = String(today.getMonth() + 1).padStart(2, '0') + '/' +
+            String(today.getDate()).padStart(2, '0') + '/' +
+            today.getFullYear();
 
-        document.getElementById("income-fecha").value = formattedDate;
-        document.getElementById("expense-fecha").value = formattedDate;
+        // Mostrar la fecha en los campos de fecha (como texto)
+        const incomeFecha = document.getElementById("income-fecha");
+        const expenseFecha = document.getElementById("expense-fecha");
+        if (incomeFecha) {
+            incomeFecha.type = 'text';
+            incomeFecha.value = formattedDate;
+            incomeFecha.readOnly = true;
+        }
+        if (expenseFecha) {
+            expenseFecha.type = 'text';
+            expenseFecha.value = formattedDate;
+            expenseFecha.readOnly = true;
+        }
     }
 
     bindEvents() {
